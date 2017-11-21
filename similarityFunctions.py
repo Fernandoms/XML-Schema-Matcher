@@ -140,22 +140,26 @@ def getJcnSimilarity(syn1, syn2, ic):
     return maxValue
 
 
+def demo():
 
-w1 = "boat"
-w2 = "boot"
+    w1 = "boat"
+    w2 = "boat"
 
-print ("Levenshtein: " + str(Levenshtein.similarity(w1, w2)))
-print ("LevenshteinTransposition: " + str(LevenshteinTransposition.similarity(w1, w2)))
-print ("Jaro: " + str(Jaro.similarity(w1, w2)))
-print ("JaroWinkler: " + str(JaroWinkler.similarity(w1,w2)))
+    print ("Levenshtein: " + str(Levenshtein.similarity(w1, w2)))
+    print ("LevenshteinTransposition: " + str(LevenshteinTransposition.similarity(w1, w2)))
+    print ("Jaro: " + str(Jaro.similarity(w1, w2)))
+    print ("JaroWinkler: " + str(JaroWinkler.similarity(w1,w2)))
 
-l1 = wordnet.synsets(w1)
-l2 = wordnet.synsets(w2)
+    l1 = wordnet.synsets(w1)
+    l2 = wordnet.synsets(w2)
 
-print ("WuPalmerSymilarity: " + str(WuPalmerSymilarity.similarity(l1, l2)))
-print ("LchSimilarity: " + str(LchSimilarity.similarity(l1, l2)))
-print ("PathSimilarity: " + str(PathSimilarity.similarity(l1, l2)))
+    print ("WuPalmerSymilarity: " + str(WuPalmerSymilarity.similarity(l1, l2)))
+    print ("LchSimilarity: " + str(LchSimilarity.similarity(l1, l2)))
+    print ("PathSimilarity: " + str(PathSimilarity.similarity(l1, l2)))
 
-print ("ResnikSimilarity: " + str(ResnikSimilarity.similarity(l1, l2)))
-print ("JiangConrathSimilarity: " + str(JiangConrathSimilarity.similarity(l1, l2)))
-print ("LinSimilarity: " + str(LinSimilarity.similarity(l1, l2)))
+    print ("ResnikSimilarity: " + str(ResnikSimilarity.similarity(l1, l2)))
+    print ("JiangConrathSimilarity: " + str(JiangConrathSimilarity.similarity(l1, l2)))
+    print ("LinSimilarity: " + str(LinSimilarity.similarity(l1, l2)))
+
+if __name__ == "__main__":
+    demo()
