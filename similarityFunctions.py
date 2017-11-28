@@ -67,77 +67,80 @@ class LinSimilarity:
 
 
 def getWupSimilarity(syn1, syn2):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             sim = s1.wup_similarity(s2)
             try:
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError):
                 pass
-    return maxValue
+    return max_value
 
 
 def getLchSimilarity(syn1, syn2):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             try:
                 sim = s1.lch_similarity(s2)
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError, WordNetError):
                 pass
-    return maxValue
+    return max_value
 
 def getPathSimilarity(syn1, syn2):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             try:
                 sim = s1.path_similarity(s2)
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError, WordNetError):
                 pass
-    return maxValue
+    return max_value
+
 
 def getResSimilarity(syn1, syn2, ic):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             try:
                 sim = s1.res_similarity(s2, ic=ic)
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError, WordNetError):
                 pass
-    return maxValue
+    return max_value
+
 
 def getLinSimilarity(syn1, syn2, ic):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             try:
                 sim = s1.lin_similarity(s2, ic=ic)
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError, WordNetError):
                 pass
-    return maxValue
+    return max_value
+
 
 def getJcnSimilarity(syn1, syn2, ic):
-    maxValue = float(0)
+    max_value = float(0)
     for s1 in syn1:
         for s2 in syn2:
             try:
                 sim = s1.jcn_similarity(s2, ic=ic)
-                if sim > maxValue:
-                    maxValue = sim
+                if sim > max_value:
+                    max_value = sim
             except (TypeError, WordNetError):
                 pass
-    return maxValue
+    return max_value
 
 
 def demo():
@@ -145,21 +148,22 @@ def demo():
     w1 = "boat"
     w2 = "boat"
 
-    print ("Levenshtein: " + str(Levenshtein.similarity(w1, w2)))
-    print ("LevenshteinTransposition: " + str(LevenshteinTransposition.similarity(w1, w2)))
-    print ("Jaro: " + str(Jaro.similarity(w1, w2)))
-    print ("JaroWinkler: " + str(JaroWinkler.similarity(w1,w2)))
+    print("Levenshtein: " + str(Levenshtein.similarity(w1, w2)))
+    print("LevenshteinTransposition: " + str(LevenshteinTransposition.similarity(w1, w2)))
+    print("Jaro: " + str(Jaro.similarity(w1, w2)))
+    print("JaroWinkler: " + str(JaroWinkler.similarity(w1,w2)))
 
     l1 = wordnet.synsets(w1)
     l2 = wordnet.synsets(w2)
 
-    print ("WuPalmerSymilarity: " + str(WuPalmerSymilarity.similarity(l1, l2)))
-    print ("LchSimilarity: " + str(LchSimilarity.similarity(l1, l2)))
-    print ("PathSimilarity: " + str(PathSimilarity.similarity(l1, l2)))
+    print("WuPalmerSymilarity: " + str(WuPalmerSymilarity.similarity(l1, l2)))
+    print("LchSimilarity: " + str(LchSimilarity.similarity(l1, l2)))
+    print("PathSimilarity: " + str(PathSimilarity.similarity(l1, l2)))
 
-    print ("ResnikSimilarity: " + str(ResnikSimilarity.similarity(l1, l2)))
-    print ("JiangConrathSimilarity: " + str(JiangConrathSimilarity.similarity(l1, l2)))
-    print ("LinSimilarity: " + str(LinSimilarity.similarity(l1, l2)))
+    print("ResnikSimilarity: " + str(ResnikSimilarity.similarity(l1, l2)))
+    print("JiangConrathSimilarity: " + str(JiangConrathSimilarity.similarity(l1, l2)))
+    print("LinSimilarity: " + str(LinSimilarity.similarity(l1, l2)))
+
 
 if __name__ == "__main__":
     demo()
