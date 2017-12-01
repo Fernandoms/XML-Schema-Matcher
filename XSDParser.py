@@ -1,23 +1,15 @@
 from lxml import etree
 
 class XMLData(object):
-    ''' Objeto para servir de elemento na árvore que representa o XSD'''
 
+    ''' Objeto para servir de elemento na árvore que representa o XSD'''
     def __init__(self, tag_name):
         self.tag_name = tag_name
-
-    def add_occurs(self, max, min):
-        self.max_occurs = max
-        self.min_occurs = min
-
-    def add_type(self, type):
-        self.type = type
-
-    def add_path(self, path):
-        self.path = path
-
-    def add_name(self, name):
-        self.name = name
+        self.max_occurs = 0 #escolher default
+        self.min_occurs = 0 #escolher default
+        self.type = ''
+        self.name = ''
+        self.path = ''
 
 
 class Node(object):
@@ -32,10 +24,11 @@ class Node(object):
     @staticmethod
     def set_data(tree, element):
         xmlData = XMLData(element.tag)
-        xmlData.add_occurs(element.get('maxOccurs'), element.get('minOccurs'))
-        xmlData.add_type(element.get('type'))
-        xmlData.add_path(tree.getpath(element))
-        xmlData.add_name(element.get('name'))
+        xmlData.max_occurs = element.get('maxOccurs')
+        xmlData.min_occurs = element.get('minOccurs')
+        xmlData.type = element.get('type')
+        xmlData.path = tree.getpath(element)
+        xmlData.name = element.get('name')
         return xmlData
 
     def print_tree(self, level=0):
