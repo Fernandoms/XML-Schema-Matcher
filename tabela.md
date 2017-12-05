@@ -1,11 +1,11 @@
- Character-Based | Term-Based       | Corpus-Based | Knowledge-Based | XSD-Based |
------------------|------------------|--------------|-----------------|-----------|
-LCS              |Jaccard           |HAL           |lhc              |Type
-Jaro             |Coseno            |LSA           |wup              |Occurrence
-Jaro-Winler      |Block Distance    |ESA           |path             |
-Levenshtein      |                  |              |res              |
-                 |                  |              |lin              |
-                 |                  |              |jcn              |
+| Character-Based | Term-Based       | Corpus-Based | Knowledge-Based | XSD-Based |
+|-----------------|------------------|--------------|-----------------|-----------|
+|LCS              |Jaccard           |HAL           |lhc              |Type
+|Jaro             |Coseno            |LSA           |wup              |Occurrence
+|Jaro-Winler      |Block Distance    |ESA           |path             |
+|Levenshtein      |                  |              |res              |
+|                 |                  |              |lin              |
+|                 |                  |              |jcn              |
 
 
 ## LCS - (Longest Common SubString)
