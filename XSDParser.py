@@ -3,6 +3,8 @@ import re
 import copy
 
 
+
+
 class XMLData(object):
     """ Objeto para servir de elemento na arvore que representa o XSD """
 
@@ -25,6 +27,9 @@ class XMLData(object):
         if self.path is not None: printable += 'path' + self.path
         return printable
 
+    def contition(self):
+        return self.tag_name not in "element"
+
 
 class Node(object):
     """ Elemento estrutural da arvore """
@@ -46,14 +51,14 @@ class Node(object):
     @staticmethod
     def set_data(tree, element):
         if element is not None:
-            xmlData = XMLData(element.tag)
-            xmlData.max_occurs = element.get('maxOccurs')
-            xmlData.min_occurs = element.get('minOccurs')
-            xmlData.type = element.get('type')
-            xmlData.path = tree.getpath(element)
-            xmlData.name = element.get('name')
-            xmlData.value = element.get('value')
-            return xmlData
+            xml_data = XMLData(element.tag)
+            xml_data.max_occurs = element.get('maxOccurs')
+            xml_data.min_occurs = element.get('minOccurs')
+            xml_data.type = element.get('type')
+            xml_data.path = tree.getpath(element)
+            xml_data.name = element.get('name')
+            xml_data.value = element.get('value')
+            return xml_data
         else:
             return None
 
@@ -73,7 +78,7 @@ class Node(object):
                 child.print_tree_clean(root, level)
 
     def has_children(self):
-        return self.children is not None
+        return self.children is not None and len(self.children) > 0
 
     def get_root(self):
         return self.ancestor.get_root() if self.ancestor is not None else self
@@ -89,12 +94,12 @@ class Node(object):
 
     @staticmethod
     def move_child(child, new_ancestor):
-        child.ancestor.children.remove(child)
-        child.ancestor = new_ancestor
-        new_ancestor.children.append(child)
+        new_child = copy.deepcopy(child)
+        new_child.ancestor = new_ancestor
+        new_ancestor.children.append(new_child)
 
     def move_types(self):
-        if self.data.type is not None and self.data.type[:3] != 'xsd':
+        if self.data.type is not None and self.data.type[:3] != 'xsd' and not self.has_children():
             root = self.get_root()
             Node.move_child(root.find_node_by_name(self.data.type), self)
 
@@ -103,13 +108,18 @@ class Node(object):
         for child in self.children:
             child.iterate()
 
+    def tree_prune(self):
+        self.children[:] = [x for x in self.children if not x.data.contition()]
+
 
 def demo():
     tree = etree.parse('/home/fernandoms/Desktop/NewXMLSchema.xsd')
     root = tree.getroot()
     structural_tree = Node(tree, root)
     structural_tree.iterate()
+    structural_tree.tree_prune()
     structural_tree.print_tree()
+
 
 if __name__ == '__main__':
     demo()
