@@ -3,8 +3,6 @@ import re
 import copy
 
 
-
-
 class XMLData(object):
     """ Objeto para servir de elemento na arvore que representa o XSD """
 
@@ -27,7 +25,7 @@ class XMLData(object):
         if self.path is not None: printable += 'path' + self.path
         return printable
 
-    def contition(self):
+    def condition(self):
         return self.tag_name not in "element"
 
 
@@ -109,11 +107,11 @@ class Node(object):
             child.iterate()
 
     def tree_prune(self):
-        self.children[:] = [x for x in self.children if not x.data.contition()]
+        self.children[:] = [x for x in self.children if not x.data.condition()]
 
 
 def demo():
-    tree = etree.parse('/home/fernandoms/Desktop/NewXMLSchema.xsd')
+    tree = etree.parse('/home/fernando/Desktop/NewXMLSchema.xsd')
     root = tree.getroot()
     structural_tree = Node(tree, root)
     structural_tree.iterate()

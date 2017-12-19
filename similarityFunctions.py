@@ -3,6 +3,7 @@ from nltk.metrics import distance
 from nltk.corpus import wordnet, wordnet_ic
 from pyjarowinkler import distance as jaroDistance
 
+
 class Levenshtein:
     @staticmethod
     def similarity(word1, word2):
@@ -74,7 +75,7 @@ def getWupSimilarity(syn1, syn2):
             try:
                 if sim > max_value:
                     max_value = sim
-            except (TypeError):
+            except TypeError:
                 pass
     return max_value
 
@@ -90,6 +91,7 @@ def getLchSimilarity(syn1, syn2):
             except (TypeError, WordNetError):
                 pass
     return max_value
+
 
 def getPathSimilarity(syn1, syn2):
     max_value = float(0)
@@ -142,6 +144,13 @@ def getJcnSimilarity(syn1, syn2, ic):
                 pass
     return max_value
 
+
+def get_sim_methods_by_words():
+    return [Levenshtein, LevenshteinTransposition, Jaro, JaroWinkler]
+
+
+def get_sim_methods_by_synsets():
+    return [WuPalmerSymilarity, LchSimilarity, PathSimilarity, ResnikSimilarity, JiangConrathSimilarity, LinSimilarity]
 
 def demo():
 
