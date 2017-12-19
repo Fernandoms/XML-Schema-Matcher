@@ -109,6 +109,20 @@ class Node(object):
     def tree_prune(self):
         self.children[:] = [x for x in self.children if not x.data.condition()]
 
+    def get_element_names(self, level=0, elements=[]):
+        if self.data.name is not None: elements.append(self.data.name)
+        for child in self.children:
+            child.get_element_names(level + 1, elements)
+        return elements
+
+
+def getTreeFromDoc(doc):
+    tree = etree.parse(doc)
+    root = tree.getroot()
+    structural_tree = Node(tree, root)
+    structural_tree.iterate()
+    structural_tree.tree_prune()
+    return structural_tree
 
 def demo():
     tree = etree.parse('/home/fernando/Desktop/NewXMLSchema.xsd')
